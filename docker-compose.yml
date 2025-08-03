@@ -1,0 +1,20 @@
+services:
+  xv6-env:
+    image: ubuntu:latest
+    environment:
+      - TZ=Asia/Shanghai
+      - DEBIAN_FRONTEND=noninteractive
+    container_name: xv6-env
+    network_mode: host
+    volumes:
+      - /home/gjorn/Documents/Course/xv6-labs-2024:/xv6-labs-2024
+    stdin_open: true
+    tty: true
+    working_dir: /xv6-labs-2024
+    command: |
+      bash -c "
+        if [ -f /xv6-labs-2024/env_init.sh ]; then
+          /xv6-labs-2024/env_init.sh
+        fi
+        exec /bin/bash
+      "
